@@ -24,40 +24,99 @@
     <main>
         <section>
             <h2>Don't forget to get your tickets!</h2>
-            <p>For helping you remind you the events you like to see, here's a little help for you. Choose the festivals
-                you like to visit with your friends and create your list to shop. Have fun!</p>
-            <ul id="ticketlist">
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag">Gurtenfestival Freitag</li>
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Samstag">Gurtenfestival Samstag</li>
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Sonntag">Gurtenfestival Sonntag</li>
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag bis Samstag">Gurtenfestival Freitag
-                    bis Samstag</li>
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag bis Sonntag">Gurtenfestival Freitag
-                    bis Sonntag</li>
-                <li><input type="checkbox" id="item1" value="Gurtenfestival Samstag bis Sonntag">Gurtenfestival Samstag
-                    bis Sonntag</li>
-                <li><input type="checkbox" id="item1" value="Energy Samstag">Energy Samstag</li>
-                <li><input type="checkbox" id="item1" value="Energy Sonntag">Energy Sonntag</li>
-                <li><input type="checkbox" id="item1" value="Gampel Festival Samstag">Gampel Festival Samstag</li>
-                <li><input type="checkbox" id="item1" value="Gampel Festival Sonntag">Gampel Festival Sonntag</li>
-                <li><input type="checkbox" id="item1" value="St. Gallen Festival Samstag">St. Gallen Festival Samstag
-                </li>
-                <li><input type="checkbox" id="item1" value="St. Gallen Festival Sonntag">St. Gallen Festival Sonntag
-                </li>
-                <li><input type="checkbox" id="item1" value="St. Gallen Festival VIP">St. Gallen Festival VIP</li>
-                <button onclick="moveToReminder()">Add to reminder Textarea</button>
-                <br>
-                <textarea id="reminder" style="height:150px"></textarea>
-            </ul>
+            <table width="100%">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tr>
+                    <td>
+                        <p>For helping you remind you the events you like to see, here's a little help for you. Choose
+                            the festivals
+                            you like to visit with your friends and create your list to shop. Have fun!</p>
+                        <ul id="ticketlist">
+                            <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag">Gurtenfestival Freitag
+                            </li>
+                            <li><input type="checkbox" id="item1" value="Gurtenfestival Samstag">Gurtenfestival Samstag
+                            </li>
+                            <li><input type="checkbox" id="item1" value="Gurtenfestival Sonntag">Gurtenfestival Sonntag
+                            </li>
+                            <li><input type="checkbox" id="item1"
+                                    value="Gurtenfestival Freitag bis Sonntag">Gurtenfestival FR bis SO</li>
+                            <li><input type="checkbox" id="item1" value="Energy Samstag">Energy Samstag</li>
+                            <li><input type="checkbox" id="item1" value="Energy Sonntag">Energy Sonntag</li>
+                            <li><input type="checkbox" id="item1" value="Gampel Festival Samstag">Gampel Festival
+                                Samstag</li>
+                            <li><input type="checkbox" id="item1" value="Gampel Festival Sonntag">Gampel Festival
+                                Sonntag</li>
+                            <li><input type="checkbox" id="item1" value="St. Gallen Festival Samstag">St. Gallen
+                                Festival Samstag
+                            </li>
+                            <li><input type="checkbox" id="item1" value="St. Gallen Festival Sonntag">St. Gallen
+                                Festival Sonntag
+                            </li>
+                            <li><input type="checkbox" id="item1" value="St. Gallen Festival VIP">St. Gallen Festival
+                                VIP</li>
+                            <button onclick="moveToReminder()">Add to reminder</button>
+                            <br>
+                            <textarea id="reminder" style="height:100px"></textarea>
+                        </ul>
+                    </td>
+                    <td valign="top" style="text-align: center;">
+                        <p>Calculate how long your favorite festival is going to start:</p>
+                        <p></p>
+                        <!-- actual vue app-->
+                        <script src="https://unpkg.com/vue"></script>
+                        <div id="app">
+                            <select v-model="selectedDate">
+                                <option disabled value="">Choose a festivaldate</option>
+                                <option v-for="date in dates" :value="date">{{ date }}</option>
+                            </select>
+                            <button @click="calculateRemainingDays">calculate</button>
+                            <br><br>
+                            <div class="result" v-if="remainingDays !== null">
+                                <h3>Remaining {{ remainingDays }} days</h3>
+                            </div>
+                        </div>
+                        <script>
+                            const app = Vue.createApp({
+                                data: function () {
+                                    return {
+                                        selectedDate: '',
+                                        remainingDays: null,
+                                        dates: [
+                                            '2024-06-01',
+                                            '2024-07-15',
+                                            '2024-08-30',
+                                            '2024-09-01',
+                                        ]
+                                    }
+                                },
+                                methods: {
+                                    calculateRemainingDays() {
+                                        if (this.selectedDate) {
+                                            const today = new Date();
+                                            const selected = new Date(this.selectedDate);
+                                            const timeDifference = selected - today;
+                                            this.remainingDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+                                        } else {
+                                            this.remainingDays = null;
+                                        }
+                                    }
+                                }
+                            });
+                            const root = app.mount('#app');
+                        </script>
+                    </td>
+                </tr>
+            </table>
         </section>
-
     </main>
 
     <footer>
-        <a>Copyright 2024 WebProject MP</a>
-        <a href="/pages/About.html">About</a>
+        <a>&copy; 2024 WebProject MP</a>
+        <a href="/pages/about.html">About</a>
     </footer>
-
 
     <script>
         function moveToReminder() {
@@ -75,5 +134,4 @@
         }
     </script>
 </body>
-
 </html>

@@ -5,7 +5,7 @@
   <title>Swiss Festivals</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css" />
   <style>
     /* Adicionei um estilo para ocultar o conteúdo por padrão */
     .acc-content {
@@ -60,7 +60,8 @@
         </tr>
         <tr class="accordion-item">
           <td>Open Air Gampel</td>
-          <td><span onmouseover="showCityInfo('Gampel-Bratsch', event)" onmouseout="hideCityInfo()">Gampel-Bratsch</span></td>
+          <td><span onmouseover="showCityInfo('Gampel-Bratsch', event)"
+              onmouseout="hideCityInfo()">Gampel-Bratsch</span></td>
           <td>15-18 August 2024</td>
           <td><a href="/events?id=3">Details</a></td>
         </tr>
@@ -75,12 +76,12 @@
   </main>
 
   <footer>
-    <a href="/pages/About.html">About</a>
-    <span>&copy; 2024 WebProject MP</span>
-  </footer>
+    <a>&copy; 2024 WebProject MP</a>
+    <a href="/pages/about.html">About</a>
+</footer>
 
   <script>
-    let popupTimeout; 
+    let popupTimeout;
     function showCityInfo(city, event) {
       clearTimeout(popupTimeout);
       let info;
@@ -104,12 +105,12 @@
       const popup = document.getElementById('popup');
       popup.textContent = info;
       popup.style.display = 'block';
-      popup.style.left = `${event.clientX + 10}px`; 
+      popup.style.left = `${event.clientX + 10}px`;
       popup.style.top = `${event.clientY}px`;
     }
 
     function hideCityInfo() {
-   
+
       popupTimeout = setTimeout(() => {
         document.getElementById('popup').style.display = 'none';
       }, 1000);
@@ -142,7 +143,7 @@
       localStorage.setItem('sortOrder', newSortOrder);
     }
 
-    window.onload = function() {
+    window.onload = function () {
       const currentSortColumn = parseInt(localStorage.getItem('sortColumn'));
       if (!isNaN(currentSortColumn)) {
         sortTable(currentSortColumn);
