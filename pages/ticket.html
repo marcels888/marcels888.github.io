@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Swiss Festivals</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Swiss Festivals Website</h1>
+    </header>
+
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/pages/ticket.html">Ticket Shop</a>
+        <a href="/pages/programs.html">Programs</a>
+        <a href="/pages/artists.html">Artists</a>
+        <a href="/pages/contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Don't forget to get your tickets!</h2>
+            <p>For helping you remind you the events you like to see, here's a little help for you. Choose the festivals
+                you like to visit with your friends and create your list to shop. Have fun!</p>
+            <ul id="ticketlist">
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag">Gurtenfestival Freitag</li>
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Samstag">Gurtenfestival Samstag</li>
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Sonntag">Gurtenfestival Sonntag</li>
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag bis Samstag">Gurtenfestival Freitag
+                    bis Samstag</li>
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Freitag bis Sonntag">Gurtenfestival Freitag
+                    bis Sonntag</li>
+                <li><input type="checkbox" id="item1" value="Gurtenfestival Samstag bis Sonntag">Gurtenfestival Samstag
+                    bis Sonntag</li>
+                <li><input type="checkbox" id="item1" value="Energy Samstag">Energy Samstag</li>
+                <li><input type="checkbox" id="item1" value="Energy Sonntag">Energy Sonntag</li>
+                <li><input type="checkbox" id="item1" value="Gampel Festival Samstag">Gampel Festival Samstag</li>
+                <li><input type="checkbox" id="item1" value="Gampel Festival Sonntag">Gampel Festival Sonntag</li>
+                <li><input type="checkbox" id="item1" value="St. Gallen Festival Samstag">St. Gallen Festival Samstag
+                </li>
+                <li><input type="checkbox" id="item1" value="St. Gallen Festival Sonntag">St. Gallen Festival Sonntag
+                </li>
+                <li><input type="checkbox" id="item1" value="St. Gallen Festival VIP">St. Gallen Festival VIP</li>
+                <button onclick="moveToReminder()">Add to reminder Textarea</button>
+                <br>
+                <textarea id="reminder" style="height:150px"></textarea>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <a>Copyright 2024 WebProject MP</a>
+        <a href="/pages/About.html">About</a>
+    </footer>
+
+
+    <script>
+        function moveToReminder() {
+            const checkboxes = document.querySelectorAll('#ticketlist input[type="checkbox"]');
+            const reminderTextarea = document.getElementById('reminder');
+            let reminderText = '';
+
+            checkboxes.forEach(function (checkbox, index) {
+                if (checkbox.checked) {
+                    reminderText += checkbox.value + '\n';
+                    checkbox.checked = false; // Reset checkbox
+                }
+            });
+            reminderTextarea.value = reminderText;
+        }
+    </script>
+</body>
+
+</html>

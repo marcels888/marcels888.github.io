@@ -1,0 +1,42 @@
+{
+  "CATALOG": {
+    "ARTIST": [
+      {
+        "NAME": "Mark Ronson",
+        "COUNTRY": "US",
+        "LABEL": "Interscope",
+        "FOUNDYEAR": 2010
+      },
+      {
+        "NAME": "Swizz Buzzers",
+        "COUNTRY": "CH",
+        "LABEL": "Sony",
+        "FOUNDYEAR": 2000
+      },
+      {
+        "NAME": "The Dumbos",
+        "COUNTRY": "NZ",
+        "LABEL": "Jungle Music",
+        "FOUNDYEAR": 2003
+      },
+      {
+        "NAME": "Mizo Miza",
+        "COUNTRY": "JP",
+        "LABEL": "YokoOne Inc.",
+        "FOUNDYEAR": 1973
+      },
+      {
+        "NAME": "Nerd Heros",
+        "COUNTRY": "DE",
+        "LABEL": "BMG",
+        "FOUNDYEAR": 2003
+      },
+      {
+        "NAME": "John Mayer",
+        "COUNTRY": "AU",
+        "LABEL": "Sony Music",
+        "FOUNDYEAR": 1999
+      }
+    ]
+  }
+}

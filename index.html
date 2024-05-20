@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Swiss Festivals</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    /* Adicionei um estilo para ocultar o conteúdo por padrão */
+    .acc-content {
+      display: none;
+    }
+
+    /* Estilo para o pop-up */
+    #popup {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid black;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Swiss Festivals Website</h1>
+  </header>
+
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/pages/ticket.html">Ticket Shop</a>
+    <a href="/pages/programs.html">Programs</a>
+    <a href="/pages/artists.html">Artists</a>
+    <a href="/pages/contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Welcome to our website!</h2>
+      <table class="accordion-table">
+        <tr class="header">
+          <td onclick="sortTable(0)">Festival</td>
+          <td onclick="sortTable(1)">Ort</td>
+          <td onclick="sortTable(2)">Datum</td>
+          <td>Infos</td>
+        </tr>
+        <tr class="accordion-item">
+          <td>Gurtenfestival 2024</td>
+          <td><span onmouseover="showCityInfo('Bern', event)" onmouseout="hideCityInfo()">Bern</span></td>
+          <td>17-20 July 2024</td>
+          <td><a href="/events?id=1">Details</a></td>
+        </tr>
+        <tr class="accordion-item">
+          <td>Energy 2024</td>
+          <td><span onmouseover="showCityInfo('Zürich', event)" onmouseout="hideCityInfo()">Zürich</span></td>
+          <td>23-30 August 2024</td>
+          <td><a href="/events?id=2">Details</a></td>
+        </tr>
+        <tr class="accordion-item">
+          <td>Open Air Gampel</td>
+          <td><span onmouseover="showCityInfo('Gampel-Bratsch', event)" onmouseout="hideCityInfo()">Gampel-Bratsch</span></td>
+          <td>15-18 August 2024</td>
+          <td><a href="/events?id=3">Details</a></td>
+        </tr>
+        <tr class="accordion-item">
+          <td>Open Air St. Gallen</td>
+          <td><span onmouseover="showCityInfo('St. Gallen', event)" onmouseout="hideCityInfo()">St. Gallen</span></td>
+          <td>27-30 June 2024</td>
+          <td><a href="/events?id=4">Details</a></td>
+        </tr>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <a href="/pages/About.html">About</a>
+    <span>&copy; 2024 WebProject MP</span>
+  </footer>
+
+  <script>
+    let popupTimeout; 
+    function showCityInfo(city, event) {
+      clearTimeout(popupTimeout);
+      let info;
+      switch (city) {
+        case 'Bern':
+          info = 'Bern is the capital of Switzerland and the fourth-most populous city in Switzerland. It is located in the central-western part of the country.';
+          break;
+        case 'Zürich':
+          info = 'Zürich is the largest city in Switzerland and the capital of the canton of Zürich. It is located in north-central Switzerland at the northwestern tip of Lake Zürich.';
+          break;
+        case 'Gampel-Bratsch':
+          info = 'Gampel-Bratsch is a municipality in the district of Leuk in the canton of Valais in Switzerland.';
+          break;
+        case 'St. Gallen':
+          info = 'St. Gallen is a city and the capital of the canton of St. Gallen in Switzerland. It evolved from the hermitage of Saint Gall, founded in the 7th century.';
+          break;
+        default:
+          info = 'Information not available';
+      }
+
+      const popup = document.getElementById('popup');
+      popup.textContent = info;
+      popup.style.display = 'block';
+      popup.style.left = `${event.clientX + 10}px`; 
+      popup.style.top = `${event.clientY}px`;
+    }
+
+    function hideCityInfo() {
+   
+      popupTimeout = setTimeout(() => {
+        document.getElementById('popup').style.display = 'none';
+      }, 1000);
+    }
+
+    function sortTable(colIndex) {
+      const table = document.querySelector(".accordion-table");
+      const rows = Array.from(table.querySelectorAll("tr.accordion-item"));
+
+      const sortedRows = rows.sort((a, b) => {
+        const textA = a.children[colIndex].textContent.trim().toLowerCase();
+        const textB = b.children[colIndex].textContent.trim().toLowerCase();
+        return textA > textB ? 1 : -1;
+      });
+
+      const currentSortColumn = parseInt(localStorage.getItem('sortColumn'));
+      const currentSortOrder = localStorage.getItem('sortOrder');
+      const isSameColumn = currentSortColumn === colIndex;
+
+      const newSortOrder = isSameColumn && currentSortOrder === 'asc' ? 'desc' : 'asc';
+
+      rows.forEach(row => table.tBodies[0].removeChild(row));
+
+      if (newSortOrder === 'desc') {
+        sortedRows.reverse();
+      }
+      sortedRows.forEach(row => table.tBodies[0].appendChild(row));
+
+      localStorage.setItem('sortColumn', colIndex);
+      localStorage.setItem('sortOrder', newSortOrder);
+    }
+
+    window.onload = function() {
+      const currentSortColumn = parseInt(localStorage.getItem('sortColumn'));
+      if (!isNaN(currentSortColumn)) {
+        sortTable(currentSortColumn);
+      }
+    };
+  </script>
+
+  <div id="popup"></div>
+
+</body>
+
+</html>

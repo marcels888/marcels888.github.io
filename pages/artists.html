@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Swiss Festivals</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Swiss Festivals Website</h1>
+    </header>
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/pages/ticket.html">Ticket Shop</a>
+        <a href="/pages/programs.html">Programs</a>
+        <a href="/pages/artists.html">Artists</a>
+        <a href="/pages/contact.html">Contact</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Artists</h2>
+            <p>Click on a Artist to display informations. Reading data from a external file (JSON), after page has been
+                loaded.
+                After clicking on an Artist, informations will be loaded (updated), without reloading the page.</p>
+            <br>
+            <p id='showArtist'></p>
+            <table id="artistTable"></table>
+
+            <script>
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'artists.json');
+                xhr.onloadend = function () {
+                    if (this.status === 200) {
+                        const obj = JSON.parse(this.responseText);
+                        console.log(obj);
+                        loadArtists(obj);
+                    } else {
+                        console.log("Error loading json file");
+                    }
+                };
+                xhr.send();
+
+                function loadArtists(obj) {
+                    let table = "";
+                    for (let i = 0; i < obj.CATALOG.ARTIST.length; i++) {
+                        let artist = obj.CATALOG.ARTIST[i];
+                        table += `<tr onclick='displayArtist(${i})'><td>${artist.NAME}</td></tr>`;
+                    }
+                    document.getElementById("artistTable").innerHTML = table;
+                }
+
+                function displayArtist(i) {
+                    const obj2 = JSON.parse(xhr.responseText);
+                    const chosen_artist = obj2.CATALOG.ARTIST[i];
+                    document.getElementById("showArtist").innerHTML =
+                        "Artist: " + chosen_artist.NAME +
+                        "<br>Country: " + chosen_artist.COUNTRY +
+                        "<br>Label: " + chosen_artist.LABEL +
+                        "<br>Founded: " + chosen_artist.FOUNDYEAR;
+                }
+            </script>
+
+        </section>
+    </main>
+
+    <footer>
+        <a>Copyright 2024 WebProject MP</a>
+        <a href="/pages/About.html">About</a>
+    </footer>
+</body>
+
+</html>

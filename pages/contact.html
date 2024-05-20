@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Swiss Festivals</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Swiss Festivals Website</h1>
+    </header>
+
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/pages/ticket.html">Ticket Shop</a>
+        <a href="/pages/programs.html">Programs</a>
+        <a href="/pages/artists.html">Artists</a>
+        <a href="/pages/contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Contact us!</h2>
+            <form action="" method="post">
+                <label>First Name</label><br>
+                <input type="text" name="firstname"><br>
+                <label>Last Name</label><br>
+                <input type="text" name="lastname" required placeholder="Required input"><br>
+                <label>Message</label><br>
+                <textarea id="message" name="message" required placeholder="Write something..." style="height:200px"
+                    maxlength="400"></textarea><br>
+                <input type="submit" name="submit" value="Send">
+            </form>
+            <p>For adding your event on our website, feel free to contact us.</p>
+            <p>By clicking the send button, you are accepting storing all of your entered data.</p>
+        </section>
+    </main>
+
+    <footer>
+        <a>Copyright 2024 WebProject MP</a>
+        <a href="/pages/About.html">About</a>
+    </footer>
+
+    <script>
+        const form = document.querySelector('form');
+        const msg = document.getElementById('message');
+
+        form.addEventListener('submit', function (e) {
+            alert("Your message has been sent. " + "From: " + form.lastname.value + " Written: " + msg.value);
+            e.preventDefault();
+        })
+    </script>
+</body>
+
+</html>

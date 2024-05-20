@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Swiss Festivals</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Swiss Festivals Website</h1>
+    </header>
+
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/pages/ticket.html">Ticket Shop</a>
+        <a href="/pages/programs.html">Programs</a>
+        <a href="/pages/artists.html">Artists</a>
+        <a href="/pages/contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <h2>See the programms!</h2>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <a href="/programm?festivalId=1">
+                    <img src="/images/gurtenfestival.png" alt="gurtenfestival" />
+                </a>
+                <div class="text"></div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <a href="/programm?festivalId=2">
+                    <img src="/images/zurichopenair.png" alt="zurichopenair" />
+                </a>
+                <div class="text"></div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <a href="/programm?festivalId=3">
+                    <img src="/images/gampelopenair.png" alt="zurichopenair" />
+                </a>
+                <div class="text"></div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <a href="/programm?festivalId=4">
+                    <img src="/images/stgallenopenair.png" alt="zurichopenair" />
+                </a>
+                <div class="text"></div>
+            </div>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+    </main>
+
+    <footer>
+        <a>Copyright 2024 WebProject MP</a>
+        <a href="/pages/About.html">About</a>
+    </footer>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides1(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides1(slideIndex = n);
+        }
+
+        function showSlides1(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+
+</body>
+
+</html>
